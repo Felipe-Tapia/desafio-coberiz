@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="estilos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <title>Tienda Corebiz</title>
+  </head>
+  <body>
+    <header>
+      <div class="nav-bar">
+        <div class="nav-superior">
+          <i class="fa-solid fa-2x fa-bars"></i>
+          <a href="#"
+            ><img src="LOGO_COREBIZ.png" alt="logo" class="img-logo"
+          /></a>
+          <input
+            type="search"
+            placeholder="¿Qué estás buscando?"
+            class="buscador-xl"
+          />
+          <div class="user-info">
+            <i class="fa-solid fa-1x fa-user"></i> Mi Cuenta
+          </div>
+          <button id="shopper">
+            <i class="fa-solid fa-2x fa-basket-shopping"></i>
+            <p id="conteo"></p>
+          </button>
+        </div>
+        <input
+          type="search"
+          placeholder="¿Qué estás buscando?"
+          class="buscador-sm"
+        />
+      </div>
+      <div class="container" style="display: none">
+        <h4><i class="fa-solid fa-xmark-large"></i></h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Total</th>
+              <th scope="col">
+                <button class="cerrar"><i class="fa-solid fa-x"></i></button>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="items"></tbody>
+          <tfoot>
+            <tr id="footer"></tr>
+          </tfoot>
+        </table>
+        <div class="row" id="cards"></div>
+      </div>
+
+      <div class="banner-slick">
+        <div>
+          <img src="Frame6.png" alt="banner 1" class="banner-desktop" />
+          <div class="banner-mobile" style="display: none">
+            <img src="mobile1.png" alt="banner 1" />
+          </div>
+        </div>
+        <div>
+          <img src="Frame3.png" alt="banner 2" class="banner-desktop" />
+          <div class="banner-mobile" style="display: none">
+            <img src="mobile2.png" alt="banner 2" />
+          </div>
+        </div>
+        <div>
+          <img src="Frame4.png" alt="banner 3" class="banner-desktop" />
+          <div class="banner-mobile" style="display: none">
+            <img src="mobile3.png" alt="banner 3" />
+          </div>
+        </div>
+      </div>
+    </header>
+    <article>
+      <h2>Más Vendidos</h2>
+      <div class="carruselMasVendidos" id="dataApi"></div>
+    </article>
+    <section class="newsletter">
+      <h2>¡Únete a nuestras novedades y promociones!</h2>
+      <form id="form-newsletter">
+        <input
+          type="text"
+          id="nombre-user"
+          name="nombre"
+          placeholder="Ingresa tu nombre"
+          required
+        />
+        <input
+          type="email"
+          id="email-user"
+          name="email"
+          placeholder="Ingresa tu mail"
+          required
+        />
+        <button class="boton-newsletter">Suscribirme</button>
+      </form>
+    </section>
+    <footer>
+      <div class="ubicacion">
+        <h3>Ubicacion</h3>
+        <ul>
+          <li>Avenida Andrômeda, 2000. Bloco 6 e 8</li>
+          <li>Alphavile SP</li>
+          <li>brasil@corebiz.ag</li>
+          <li>+55 11 3090 1039</li>
+        </ul>
+      </div>
+      <div class="contacto">
+        <a href="#"
+          ><button>
+            <i class="fa-solid fa-envelope"></i><span>CONTÁCTANOS</span
+            ><span> </span></button
+        ></a>
+        <a href="#"
+          ><button>
+            <i class="fa-solid fa-headphones"></i
+            ><span>HABLA CON UN CONSULTOR</span><span> </span></button
+        ></a>
+      </div>
+      <div class="marcas">
+        <img src="corebiz-logo-blackmarina.png" alt="logo" style="max-width:100px">
+        <img src="vtex.png" alt="logo" style="max-width:80px">
+      </div>
+    </footer>
+    <template id="card-producto">
+      <div id="contenedor-producto">
+        <img src="" />
+        <h5 class="nombre-producto"></h5>
+        <tr class="hotel_a">
+          <td>
+            <div class="estrellas-producto">
+              <div class="stars-inner"></div>
+            </div>
+          </td>
+          <p class="precio-antiguo"></p>
+          <p class="precio-nuevo"></p>
+          <p class="cuotas-producto"></p>
+          <button class="buy-btn">COMPRAR</button>
+        </tr>
+      </div>
+    </template>
+    <template id="template-footer">
+      <th scope="row">Total productos</th>
+      <td>10</td>
+      <td>$ <span>5000</span></td>
+      <td class="font-weight-bold">
+        <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+          <i class="fa-regular fa-2x fa-trash-can"></i>
+        </button>
+      </td>
+    </template>
+    <template id="template-carrito">
+      <tr>
+        <th scope="row">id</th>
+        <td></td>
+        <td>$ <span>500</span></td>
+        <td>
+          <button class="btn btn-info btn-sm">
+            +<!-- <i class="fa-regular fa-2x fa-square-plus"></i> -->
+          </button>
+          <button class="btn btn-danger btn-sm">
+            -<!-- <i class="fa-regular fa-2x fa-square-minus"></i> -->
+          </button>
+        </td>
+      </tr>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="carruseles.js"></script>
+    <script src="carritoCompra.js"></script>
+    <script src="newsletter.js"></script>
+  </body>
+</html>
